@@ -12,3 +12,10 @@ Next steps:
 [] Copy SSH keys
 [] Configure UFW to only allow access from SG.
 [] Configure SSHD to only key based authentication.
+[] Set up Glances for remote system monitoring
+
+### Sun Nov  7 16:59:44 MST 2021
+Didn't accomplish much today. Need to rewire KVM switch.
+
+### Sun Nov  7 21:53:48 MST 2021
+Added in Ansible playbook to install Docker on the security gateway
