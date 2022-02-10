@@ -1,0 +1,7 @@
+- name: Restat Docker daemon
+  systemd:
+    name: docker
+    state: restarted
+    enabled: True
+  listen:
+    - restart-docker 
