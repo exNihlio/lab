@@ -6,9 +6,9 @@ services:
       ports:
         - "8200:8200"
       volumes:
-        - {{ vault.dirs.config }}:/vault/config 
+        - {{ vault.dirs.config }}:/vault/config
         - {{ vault.dirs.storage }}:/vault/file
-        - /etc/ssl/private:/mnt/vault/ssl/keys
-        - /etc/ssl/certs:/mnt/vault/ssl/keys
+        - /etc/ssl/private:/mnt/vault/ssl/keys:ro
+        - /etc/ssl/certs:/mnt/vault/ssl/certs:ro
       cap_add:
         - IPC_LOCK
