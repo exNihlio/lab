@@ -1,0 +1,116 @@
+#############
+#### SSH ####
+#############
+- name: Set SSH rules
+  ufw:
+    rule: "allow"
+    port: "{{ ufw.ssh.port }}"
+    proto: "tcp"
+    src: "{{ ufw.ssh.hosts }}"
+
+###############
+#### Vault ####
+###############
+- name: Set Vault rules
+  ufw:
+    rule: "allow"
+    port: "{{ ufw.vault.port }}"
+    proto: "tcp"
+    src: "{{ ufw.vault.hosts }}"
+
+- name: Set Sabnzbd rules
+  ufw:
+    rule: "allow"
+    port: "{{ ufw.sabnzbd.port }}"
+    proto: "tcp"
+    src: "{{ ufw.sabnzbd.hosts }}"
+
+######################    
+#### Transmission ####
+######################
+- name: Set Transmission web interface
+  ufw:
+    rule: "allow"
+    port: "{{ ufw.transmission.web.port }}"
+    proto: "tcp"
+    src: "{{ ufw.transmission.hosts }}"
+    comment: Transmission web interface
+
+- name: Set Transmission peer port
+  ufw:
+    rule: "allow"
+    port: "{{ ufw.transmission.peer.port }}"
+    proto: "tcp"
+    comment: Transmission peer port
+
+- name: Set Transmission peer port
+  ufw:
+    rule: "allow"
+    port: "{{ ufw.transmission.peer.port }}"
+    proto: "udp"
+    comment: Transmission peer port
+
+#################
+#### Pihole #####
+#################
+## Everyone can use DNS
+- name: Set Pihole DNS port
+  ufw:
+    rule: "allow"
+    port: "{{ ufw.pihole.dns.port }}"
+    proto: "udp"
+    comment: "Pihole DNS"
+
+- name: Set Pihole web interface port
+  ufw:
+    rule: "allow"
+    port: "{{ ufw.pihole.web.port }}"
+    proto: "tcp"
+    src: "{{ ufw.pihole.hosts }}"
+    rule: "Pihole Web interface"
+
+- name: Set the Pihole secure web port
+  ufw:
+    rule: "allow"
+    port: "{{ ufw.pihole.secure_web.port }}"
+    proto: "tcp"
+    src: "{{ ufw.pihole.hosts }}"
+    rule: "Pihole secure web interface"
+
+## Everyone gets DHCP
+- name: Set Pihole DHCP port
+  ufw:
+    rule: "allow"
+    port: "{{ ufw.pihole.dhcp.port }}"
+    proto: "udp"
+    comment: "Pihole DHCP"
+
+##############
+#### Plex ####
+##############
+- name: Set Plex port
+  ufw:
+    rule: "allow"
+    port: "{{ ufw.plex.main.port }}"
+    proto: "tcp"
+    comment: "Plex Media Server Port"
+  
+- name: Set Plex DLNA ports
+  ufw:
+    rule: "allow"
+    port: "{{ item }}"
+    proto: "udp"
+    comment: "Plex DLNA ports"
+  loop: "{{ plex.dlna.ports }}"
+    
+- name: Set Plex GDM discovery ports
+  ufw:
+    rule: "allow"
+    port: "{{ item }}"
+    proto: "udp"
+    comment: "Plex GDM ports"
+  loop: "{{ plex.gdm.ports }}"
+
+- name: Set UFW policy
+  state: "{{ ufw.state }}"
+  policy: "{{ ufw.policy }}"

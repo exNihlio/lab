@@ -1,0 +1,4 @@
+- hosts: localhost
+  become: True
+  roles:
+    - firewall
