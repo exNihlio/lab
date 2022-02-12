@@ -1,0 +1,34 @@
+## Vault directories
+- name: Create Vault storage directories
+  file:
+    state: directory
+    path: "{{ item.value }}" 
+    owner: root
+    group: root
+    mode: 0700
+  loop: "{{ vault.dirs | dict2items }}"
+
+- name: Render the vault-server.hcl template 
+  template:
+    src: templates/vault-server.template
+    dest: "{{ vault.dirs.config }}"
+
+- name: Sync the Vault certificate
+  copy:
+    src: /etc/ssl/certs/{{ vault.tls.cert }}
+    dest: "{{ vault.dirs.certs }}/"
+
+- name: Sync the Vault key
+  copy:
+    src: /etc/ssl/private/{{ vault.tls.key }}
+    dest: "{{ vault.dirs.certs }}/"
+
+- name: Render Dockerfile template
+  template:
+    src: templates/docker-compose.template
+    dest: ./docker-compose.yml
+
+- name: Deploy the containers
+  docker_compose:
+    project_src: .
+    state: present

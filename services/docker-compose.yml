@@ -1,0 +1,13 @@
+version: "3"
+services:
+    vault:
+      image: hashicorp/vault:1.9.3 
+      command: ["vault", "server", "-config", "/vault/config"]
+      ports:
+        - "8200:8200"
+      volumes:
+        - /data/disks/config/vault/config:/vault/config 
+        - /data/disks/config/vault/certs:/mnt/vault/ssl 
+        - /data/disks/config/vault/storage:/vault/file
+      cap_add:
+        - IPC_LOCK

@@ -1,0 +1,9 @@
+file:
+{{range .Vars.services}}
+  /etc/ssl/private/lab_{{.name}}_key.pem:
+    exists: True
+  /etc/ssl/private/lab_{{.name}}.csr:
+    exists: True
+  /etc/ssl/certs/lab_{{.name}}.crt:
+    exists: True
+{{end}}

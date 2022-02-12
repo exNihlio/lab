@@ -1,0 +1,13 @@
+version: "3"
+services:
+    vault:
+      image: {{ vault.image }}:{{ vault.tag }} 
+      command: ["vault", "server", "-config", "/vault/config"]
+      ports:
+        - "8200:8200"
+      volumes:
+        - {{ vault.dirs.config }}:/vault/config 
+        - {{ vault.dirs.certs }}:/mnt/vault/ssl 
+        - {{ vault.dirs.storage }}:/vault/file
+      cap_add:
+        - IPC_LOCK

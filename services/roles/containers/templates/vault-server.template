@@ -1,0 +1,12 @@
+storage "file" {
+      path = "/vault/file/data"
+}
+
+listener "tcp" {
+      address = "0.0.0.0:8200"
+      tls_enable = true
+      tls_cert_file = "/mnt/vault/ssl/{{ vault.tls.cert }}"
+      tls_key_file = "/mnt/vault/ssl/{{ vault.tls.key }}"
+}
+
+ui = false

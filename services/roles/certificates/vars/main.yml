@@ -1,0 +1,69 @@
+ca:
+  key: 4096
+  type: RSA
+  common_name: lab_root_ca
+  country_name: "US"
+  locality_name: "Salt Lake City"
+  organization_name: "Lab Services"
+  organizational_unit_name: "Lab CA Services"
+  state_or_province_name: UT
+intermediate_ca:
+  key: 4096
+  type: RSA
+  common_name: lab_intermediate_ca
+  country_name: "US"
+  locality_name: "Salt Lake City"
+  organization_name: "Lab Services"
+  organizational_unit_name: "Lab CA Services"
+  state_or_province_name: UT
+services:
+  - name: vault
+    common_name: vault
+    country_name: "US"
+    dns: "vault.sami.dog"
+    locality_name: "Salt Lake City"
+    key: 4096
+    organization_name: "Lab Services"
+    organizational_unit_name: "Lab Vault Services"
+    state_or_province_name: UT
+    type: RSA
+  #minio:
+  #  key: 4096
+  #  type: RSA
+  #  common_name: minio
+  #  country_name: "US"
+  #  locality_name: "Salt Lake City"
+  #  organization_name: "Lab Services"
+  #  organization_unit_name: "Lab Object Storage Services"
+  #prometheus:
+  #  key: 4096
+  #  type: RSA
+  #  common_name: prometheus
+  #  country_name: "US"
+  #  locality_name: "Salt Lake City"
+  #  organization_name: "Lab Services"
+  #  organization_unit_name: "Lab Monitoring Services"
+  #grafana:
+  #  key: 4096
+  #  type: RSA
+  #  common_name: grafana
+  #  country_name: "US"
+  #  locality_name: "Salt Lake City"
+  #  organization_name: "Lab Services"
+  #  organization_unit_name: "Lab Dahsboard Services"
+  #gitlab:
+  #  key: 4096
+  #  type: RSA
+  #  common_name: minio
+  #  country_name: "US"
+  #  locality_name: "Salt Lake City"
+  #  organization_name: "Lab Services"
+  #  organization_unit_name: "Lab Version Control Services"
+  #jenkins:
+  #  key: 4096
+  #  type: RSA
+  #  common_name: jenkins
+  #  country_name: "US"
+  #  locality_name: "Salt Lake City"
+  #  organization_name: "Lab Services"
+  #  organization_unit_name: "Lab Deployment Services"

@@ -1,0 +1,91 @@
+### Offline root CA ###
+- name: Create root (offline) CA key
+  openssl_privatekey:
+    force: false
+    path: /etc/ssl/private/lab_root_ca_key.pem
+    size: "{{ ca.key }}"
+    type: "{{ ca.type }}"
+
+- name: Create root (offline) CA CSR
+  openssl_csr:
+    common_name: "{{ ca.common_name }}"
+    country_name: "{{ ca.country_name }}"
+    force: false
+    locality_name: "{{ ca.locality_name }}"
+    organization_name: "{{ ca.organization_name }}"
+    organizational_unit_name: "{{ ca.organizational_unit_name }}"
+    path: /etc/ssl/private/lab_root_ca.csr
+    privatekey_path: /etc/ssl/private/lab_root_ca_key.pem
+    state_or_province_name: "{{ ca.state_or_province_name }}"
+
+- name: Create root (offline) CA cert
+  openssl_certificate:
+    csr_path: /etc/ssl/private/lab_root_ca.csr
+    force: false
+    path: /etc/ssl/certs/lab_root_ca.pem
+    privatekey_path: /etc/ssl/private/lab_root_ca_key.pem
+    provider: selfsigned
+
+### Intermediate CA ###
+- name: Create intermediate CA key
+  openssl_privatekey:
+    force: false
+    path: /etc/ssl/private/lab_intermediate_ca_key.pem
+    size: "{{ intermediate_ca.key }}"
+    type: "{{ intermediate_ca.type }}"
+
+- name: Create intermediate CA CSR
+  openssl_csr:
+    common_name: "{{ intermediate_ca.common_name }}"
+    country_name: "{{ intermediate_ca.country_name }}"
+    force: false
+    locality_name: "{{ intermediate_ca.common_name }}"
+    organization_name: "{{ intermediate_ca.common_name }}"
+    organizational_unit_name: "{{ intermediate_ca.common_name }}"
+    path: /etc/ssl/private/lab_intermediate_ca.csr
+    privatekey_path: /etc/ssl/private/lab_intermediate_ca_key.pem
+    state_or_province_name: "{{ intermediate_ca.common_name }}"
+
+- name: Create intermediate CA cert
+  openssl_certificate:
+    csr_path: /etc/ssl/private/lab_intermediate_ca.csr
+    force: false
+    ownca_path: /etc/ssl/certs/lab_root_ca.pem
+    ownca_privatekey_path: /etc/ssl/private/lab_root_ca_key.pem
+    path: /etc/ssl/certs/lab_intermediate_ca.pem
+    privatekey_path: /etc/ssl/private/lab_intermediate_ca_key.pem
+    provider: ownca
+
+## Certificate infrastructure for individual certs
+## These will be signed with the intermediate certificate
+- name: Create service x509 key
+  openssl_privatekey:
+    force: false
+    path: /etc/ssl/private/lab_{{ item.name }}_key.pem
+    size: "{{ item.key }}"
+    type: "{{ item.type }}"
+  loop: "{{ services }}"
+
+- name: Create service x509 CSR
+  openssl_csr:
+    common_name: "{{ item.common_name }}"
+    country_name: "{{ item.country_name }}"
+    force: false
+    locality_name: "{{ item.locality_name }}"
+    organization_name: "{{ item.organization_name }}"
+    organizational_unit_name: "{{ item.organizational_unit_name }}"
+    path: /etc/ssl/private/lab_{{ item.name }}.csr
+    privatekey_path: /etc/ssl/private/lab_{{ item.name }}_key.pem
+    state_or_province_name: "{{ item.state_or_province_name }}"
+    subject_alt_name: "DNS:{{ item.dns }}"
+  loop: "{{ services }}"
+
+- name: Create service x509 cert
+  openssl_certificate:
+    csr_path: /etc/ssl/private/lab_{{ item.name }}.csr
+    force: false
+    ownca_path: /etc/ssl/certs/lab_intermediate_ca.pem
+    ownca_privatekey_path: /etc/ssl/private/lab_intermediate_ca_key.pem 
+    path: /etc/ssl/certs/lab_{{ item.name }}.pem
+    provider: ownca
+  loop: "{{ services }}"
