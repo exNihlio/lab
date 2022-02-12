@@ -1,10 +1,3 @@
-vault:
-  image: "hashicorp/vault"
-  tag: "1.9.3"
-  dirs:
-    config: "/data/disks/config/vault/config"
-    certs: "/data/disks/config/vault/certs"
-    storage: "/data/disks/config/vault/storage"
-  tls:
-    cert: "lab_vault.pem"
-    key: "lab_vault_key.pem"
+registry:
+  image: "registry"
+  tag: "2.8.0"

@@ -4,6 +4,6 @@ file:
     exists: True
   /etc/ssl/private/lab_{{.name}}.csr:
     exists: True
-  /etc/ssl/certs/lab_{{.name}}.crt:
+  /etc/ssl/certs/lab_{{.name}}.pem:
     exists: True
 {{end}}

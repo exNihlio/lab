@@ -1,19 +1,7 @@
-## Vault directories
-- name: Create Vault storage directories
+- name: Create registry storage directory
   file:
+    path: /data/disks/registry/storage
     state: directory
-    path: "{{ item.value }}" 
-    owner: root
-    group: root
-    mode: 0750
-  loop: "{{ vault.dirs | dict2items }}"
-  become: True
-
-- name: Render the vault-server.hcl template 
-  template:
-    src: templates/vault-server.template
-    dest: "{{ vault.dirs.config }}/vault-server.hcl"
-  become: True
 
 - name: Render Dockerfile template
   template:

@@ -1,14 +1,27 @@
 version: "3"
 services:
-    vault:
-      image: {{ vault.image }}:{{ vault.tag }} 
-      command: ["vault", "server", "-config", "/vault/config"]
+    registry:
+      environment:
+        REGISTRY_HTTP_ADDR: "0.0.0.0:5443"
+        REGISTRY_HTTP_TLS_CERTIFICATE: "/ssl/private/lab_registry.pem"
+        REGISTRY_HTTP_TLS_KEY: "/certs/private/lab_registry_key.pem"
+      image: "{{ registry.image }}:{{ registry.tag }}"
       ports:
-        - "8200:8200"
+        - "5443:5443"
+      restart: unless-stopped
       volumes:
-        - {{ vault.dirs.config }}:/vault/config
-        - {{ vault.dirs.storage }}:/vault/file
-        - /etc/ssl/private-keys:/mnt/vault/ssl/keys:ro
-        - /etc/ssl/certs:/mnt/vault/ssl/certs:ro
-      cap_add:
-        - IPC_LOCK
+        - /data/disks/registry/storage:/var/lib/registry
+        - /etc/ssl/certs:/ssl/certs:ro
+        - /etc/ssl/private:/ssl/private:ro
+      #vault:
+      #  image: {{ vault.image }}:{{ vault.tag }}
+      #  command: ["vault", "server", "-config", "/vault/config"]
+      #  ports:
+      #    - "8200:8200"
+      #  volumes:
+      #    - {{ vault.dirs.config }}:/vault/config
+      #    - {{ vault.dirs.storage }}:/vault/file
+      #    - /etc/ssl/private-keys:/mnt/vault/ssl/keys:ro
+      #    - /etc/ssl/certs:/mnt/vault/ssl/certs:ro
+      #  cap_add:
+      #    - IPC_LOCK

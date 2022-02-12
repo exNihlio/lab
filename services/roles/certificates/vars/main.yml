@@ -1,29 +1,31 @@
 ca:
-  key: 4096
-  type: RSA
-  common_name: lab_root_ca
+  key: "4096"
+  type: "RSA"
+  common_name: "lab_root_ca"
   country_name: "US"
   locality_name: "Salt Lake City"
   organization_name: "Lab Services"
   organizational_unit_name: "Lab CA Services"
-  state_or_province_name: UT
+  state_or_province_name: "UT"
 intermediate_ca:
-  key: 4096
-  type: RSA
-  common_name: lab_intermediate_ca
+  key: "4096"
+  type: "RSA"
+  common_name: "lab_intermediate_ca"
   country_name: "US"
   locality_name: "Salt Lake City"
   organization_name: "Lab Services"
   organizational_unit_name: "Lab CA Services"
-  state_or_province_name: UT
+  state_or_province_name: "UT"
 services:
-  - name: registry
-    key: 4096
-    type: RSA
-    common_name: registry.sami.dog
+  - name: "registry"
+    key: "4096"
+    type: "RSA"
+    common_name: "registry.sami.dog"
+    country_name: "US"
     locality_name: "Salt Lake City"
     organization_name: "Lab Services"
     organizational_unit_name: "Lab Image Registry Services"
+    state_or_province_name: "UT"
   #minio:
   #  key: 4096
   #  type: RSA
