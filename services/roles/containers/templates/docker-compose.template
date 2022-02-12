@@ -7,7 +7,8 @@ services:
         - "8200:8200"
       volumes:
         - {{ vault.dirs.config }}:/vault/config 
-        - {{ vault.dirs.certs }}:/mnt/vault/ssl 
         - {{ vault.dirs.storage }}:/vault/file
+        - /etc/ssl/private:/mnt/vault/ssl/keys
+        - /etc/ssl/certs:/mnt/vault/ssl/keys
       cap_add:
         - IPC_LOCK

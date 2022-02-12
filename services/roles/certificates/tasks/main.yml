@@ -61,7 +61,8 @@
 - name: Create service x509 key
   openssl_privatekey:
     force: false
-    path: /etc/ssl/private/lab_{{ item.name }}_key.pem
+    mode: 0644
+    path: /etc/ssl/keys/lab_{{ item.name }}_key.pem
     size: "{{ item.key }}"
     type: "{{ item.type }}"
   loop: "{{ services }}"
@@ -72,6 +73,7 @@
     country_name: "{{ item.country_name }}"
     force: false
     locality_name: "{{ item.locality_name }}"
+    mode: 0644
     organization_name: "{{ item.organization_name }}"
     organizational_unit_name: "{{ item.organizational_unit_name }}"
     path: /etc/ssl/private/lab_{{ item.name }}.csr
@@ -84,6 +86,7 @@
   openssl_certificate:
     csr_path: /etc/ssl/private/lab_{{ item.name }}.csr
     force: false
+    mode: 0644
     ownca_path: /etc/ssl/certs/lab_intermediate_ca.pem
     ownca_privatekey_path: /etc/ssl/private/lab_intermediate_ca_key.pem 
     path: /etc/ssl/certs/lab_{{ item.name }}.pem
