@@ -3,52 +3,58 @@
 #############
 - name: Set SSH rules
   ufw:
-    rule: "allow"
     port: "{{ ufw.ssh.port }}"
     proto: "tcp"
-    src: "{{ ufw.ssh.hosts }}"
+    rule: "allow"
+    src: "{{ item }}"
+  loop: "{{ ufw.ssh.hosts}}"
 
 ###############
 #### Vault ####
 ###############
 - name: Set Vault rules
   ufw:
-    rule: "allow"
+    comment: "Vault rules"
     port: "{{ ufw.vault.port }}"
     proto: "tcp"
-    src: "{{ ufw.vault.hosts }}"
+    rule: "allow"
+    src: "{{ item }}"
+  loop: "{{ ufw.vault.hosts }}"
 
 - name: Set Sabnzbd rules
   ufw:
-    rule: "allow"
+    comment: "Sabnzbd rules"
     port: "{{ ufw.sabnzbd.port }}"
     proto: "tcp"
-    src: "{{ ufw.sabnzbd.hosts }}"
+    rule: "allow"
+    src: "{{ item }}"
+  loop: "{{ ufw.sabnzbd.hosts }}"
 
 ######################    
 #### Transmission ####
 ######################
 - name: Set Transmission web interface
   ufw:
-    rule: "allow"
+    comment: "Transmission web interface"
     port: "{{ ufw.transmission.web.port }}"
     proto: "tcp"
-    src: "{{ ufw.transmission.hosts }}"
-    comment: Transmission web interface
+    rule: "allow"
+    src: "{{ item }}"
+  loop: "{{ ufw.transmission.hosts }}"
 
 - name: Set Transmission peer port
   ufw:
-    rule: "allow"
     port: "{{ ufw.transmission.peer.port }}"
     proto: "tcp"
-    comment: Transmission peer port
+    rule: "allow"
+    comment: "Transmission peer port"
 
 - name: Set Transmission peer port
   ufw:
     rule: "allow"
     port: "{{ ufw.transmission.peer.port }}"
     proto: "udp"
-    comment: Transmission peer port
+    comment: "Transmission peer port"
 
 #################
 #### Pihole #####
@@ -56,26 +62,28 @@
 ## Everyone can use DNS
 - name: Set Pihole DNS port
   ufw:
-    rule: "allow"
+    comment: "Pihole DNS"
     port: "{{ ufw.pihole.dns.port }}"
     proto: "udp"
-    comment: "Pihole DNS"
+    rule: "allow"
 
 - name: Set Pihole web interface port
   ufw:
-    rule: "allow"
+    comment: "Pihole Web interface"
     port: "{{ ufw.pihole.web.port }}"
     proto: "tcp"
-    src: "{{ ufw.pihole.hosts }}"
-    comment: "Pihole Web interface"
+    src: "{{ item }}"
+    rule: "allow"
+  loop: "{{ ufw.pihole.hosts }}"
 
 - name: Set the Pihole secure web port
   ufw:
-    rule: "allow"
     port: "{{ ufw.pihole.secure_web.port }}"
     proto: "tcp"
-    src: "{{ ufw.pihole.hosts }}"
+    src: "{{ item }}"
+    rule: "allow"
     comment: "Pihole secure web interface"
+  loop: "{{ ufw.pihole.hosts }}"
 
 ## Everyone gets DHCP
 - name: Set Pihole DHCP port
