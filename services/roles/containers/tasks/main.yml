@@ -12,7 +12,7 @@
 - name: Render the vault-server.hcl template 
   template:
     src: templates/vault-server.template
-    dest: "{{ vault.dirs.config }}"
+    dest: "{{ vault.dirs.config }}/vault-server.hcl"
   become: True
 
 - name: Sync the Vault certificate
