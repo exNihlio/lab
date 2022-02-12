@@ -58,11 +58,20 @@
 
 ## Certificate infrastructure for individual certs
 ## These will be signed with the intermediate certificate
+# ## This is a bad idea
+- name: Create bind directory for x509 service keys
+  file:
+    path: /etc/ssl/private-keys
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+
 - name: Create service x509 key
   openssl_privatekey:
     force: false
     mode: 0644
-    path: /etc/ssl/keys/lab_{{ item.name }}_key.pem
+    path: /etc/ssl/private-services/lab_{{ item.name }}_key.pem
     size: "{{ item.key }}"
     type: "{{ item.type }}"
   loop: "{{ services }}"
@@ -77,7 +86,7 @@
     organization_name: "{{ item.organization_name }}"
     organizational_unit_name: "{{ item.organizational_unit_name }}"
     path: /etc/ssl/private/lab_{{ item.name }}.csr
-    privatekey_path: /etc/ssl/private/lab_{{ item.name }}_key.pem
+    privatekey_path: /etc/ssl/private-keys/lab_{{ item.name }}_key.pem
     state_or_province_name: "{{ item.state_or_province_name }}"
     subject_alt_name: "DNS:{{ item.dns }}"
   loop: "{{ services }}"
