@@ -112,5 +112,6 @@
   loop: "{{ plex.gdm.ports }}"
 
 - name: Set UFW policy
-  state: "{{ ufw.state }}"
-  policy: "{{ ufw.policy }}"
+  ufw:
+    state: "{{ ufw.state }}"
+    policy: "{{ ufw.policy }}"
