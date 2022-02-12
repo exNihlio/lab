@@ -24,7 +24,7 @@
 - name: Set Sabnzbd rules
   ufw:
     comment: "Sabnzbd rules"
-    port: "{{ ufw.sabnzbd.port }}"
+    port: "{{ ufw.sabnzbd.secure_web.port }}"
     proto: "tcp"
     rule: "allow"
     src: "{{ item }}"
@@ -98,25 +98,25 @@
 ##############
 - name: Set Plex port
   ufw:
-    rule: "allow"
+    comment: "Plex Media Server Port"
     port: "{{ ufw.plex.main.port }}"
     proto: "tcp"
-    comment: "Plex Media Server Port"
+    rule: "allow"
   
 - name: Set Plex DLNA ports
   ufw:
-    rule: "allow"
+    comment: "Plex DLNA ports"
     port: "{{ item }}"
     proto: "udp"
-    comment: "Plex DLNA ports"
+    rule: "allow"
   loop: "{{ plex.dlna.ports }}"
     
 - name: Set Plex GDM discovery ports
   ufw:
-    rule: "allow"
+    comment: "Plex GDM ports"
     port: "{{ item }}"
     proto: "udp"
-    comment: "Plex GDM ports"
+    rule: "allow"
   loop: "{{ plex.gdm.ports }}"
 
 - name: Set UFW policy
