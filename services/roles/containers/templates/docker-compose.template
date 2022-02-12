@@ -6,6 +6,7 @@ services:
       REGISTRY_HTTP_TLS_CERTIFICATE: "/ssl/certs/lab_registry.pem"
       REGISTRY_HTTP_TLS_KEY: "/certs/private/lab_registry_key.pem"
     image: "{{ registry.image }}:{{ registry.tag }}"
+    network_mode: "host"
     ports:
       - "5443:5443"
     restart: unless-stopped
