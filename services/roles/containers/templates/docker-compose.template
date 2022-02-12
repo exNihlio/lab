@@ -8,7 +8,7 @@ services:
       volumes:
         - {{ vault.dirs.config }}:/vault/config
         - {{ vault.dirs.storage }}:/vault/file
-        - /etc/ssl/private:/mnt/vault/ssl/keys:ro
+        - /etc/ssl/private-keys:/mnt/vault/ssl/keys:ro
         - /etc/ssl/certs:/mnt/vault/ssl/certs:ro
       cap_add:
         - IPC_LOCK
