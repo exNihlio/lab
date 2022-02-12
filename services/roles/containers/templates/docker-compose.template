@@ -4,7 +4,7 @@ services:
     environment:
       REGISTRY_HTTP_ADDR: "0.0.0.0:5443"
       REGISTRY_HTTP_TLS_CERTIFICATE: "/ssl/certs/lab_registry.pem"
-      REGISTRY_HTTP_TLS_KEY: "/certs/private/lab_registry_key.pem"
+      REGISTRY_HTTP_TLS_KEY: "/ssl/private/lab_registry_key.pem"
     image: "{{ registry.image }}:{{ registry.tag }}"
     network_mode: "host"
     ports:
