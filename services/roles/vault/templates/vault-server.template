@@ -1,0 +1,13 @@
+storage "file" {
+      path = "/opt/vault/storage"
+}
+
+listener "tcp" {
+      address = "0.0.0.0:8200"
+      tls_enable = true
+      tls_cert_file = "/opt/vault/ssl/vault.pem"
+      tls_key_file = "/opt/vault/ssl/vault_key.pem"
+}
+
+ui = false
+api_addr = "https://vault.sami.dog"

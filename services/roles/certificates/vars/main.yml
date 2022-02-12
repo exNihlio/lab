@@ -17,16 +17,7 @@ intermediate_ca:
   organizational_unit_name: "Lab CA Services"
   state_or_province_name: UT
 services:
-  - name: vault
-    common_name: vault
-    country_name: "US"
-    dns: "vault.sami.dog"
-    locality_name: "Salt Lake City"
-    key: 4096
-    organization_name: "Lab Services"
-    organizational_unit_name: "Lab Vault Services"
-    state_or_province_name: UT
-    type: RSA
+  - 
   #minio:
   #  key: 4096
   #  type: RSA
