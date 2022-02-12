@@ -109,7 +109,7 @@
     port: "{{ item }}"
     proto: "udp"
     rule: "allow"
-  loop: "{{ plex.dlna.ports }}"
+  loop: "{{ ufw.plex.dlna.ports }}"
     
 - name: Set Plex GDM discovery ports
   ufw:
@@ -117,7 +117,7 @@
     port: "{{ item }}"
     proto: "udp"
     rule: "allow"
-  loop: "{{ plex.gdm.ports }}"
+  loop: "{{ ufw.plex.gdm.ports }}"
 
 - name: Set UFW policy
   ufw:
