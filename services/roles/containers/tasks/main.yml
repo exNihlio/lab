@@ -5,23 +5,27 @@
     path: "{{ item.value }}" 
     owner: root
     group: root
-    mode: 0700
+    mode: 0750
   loop: "{{ vault.dirs | dict2items }}"
+  become: True
 
 - name: Render the vault-server.hcl template 
   template:
     src: templates/vault-server.template
     dest: "{{ vault.dirs.config }}"
+  become: True
 
 - name: Sync the Vault certificate
   copy:
     src: /etc/ssl/certs/{{ vault.tls.cert }}
     dest: "{{ vault.dirs.certs }}/"
+  become: True
 
 - name: Sync the Vault key
   copy:
     src: /etc/ssl/private/{{ vault.tls.key }}
     dest: "{{ vault.dirs.certs }}/"
+  become: True
 
 - name: Render Dockerfile template
   template:
