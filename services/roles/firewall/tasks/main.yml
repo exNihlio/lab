@@ -67,7 +67,7 @@
     port: "{{ ufw.pihole.web.port }}"
     proto: "tcp"
     src: "{{ ufw.pihole.hosts }}"
-    rule: "Pihole Web interface"
+    comment: "Pihole Web interface"
 
 - name: Set the Pihole secure web port
   ufw:
@@ -75,7 +75,7 @@
     port: "{{ ufw.pihole.secure_web.port }}"
     proto: "tcp"
     src: "{{ ufw.pihole.hosts }}"
-    rule: "Pihole secure web interface"
+    comment: "Pihole secure web interface"
 
 ## Everyone gets DHCP
 - name: Set Pihole DHCP port
