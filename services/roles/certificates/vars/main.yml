@@ -17,7 +17,13 @@ intermediate_ca:
   organizational_unit_name: "Lab CA Services"
   state_or_province_name: UT
 services:
-  - 
+  - name: registry
+    key: 4096
+    type: RSA
+    common_name: registry.sami.dog
+    locality_name: "Salt Lake City"
+    organization_name: "Lab Services"
+    organizational_unit_name: "Lab Image Registry Services"
   #minio:
   #  key: 4096
   #  type: RSA
