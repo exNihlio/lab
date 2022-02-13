@@ -38,6 +38,8 @@
     mode: 0644
     owner: vault
     src: templates/vault-server.template
+  notify:
+    - restart-vault
 
 ##- name: Create Vault x509 keyG
 ##  openssl_privatekey:
