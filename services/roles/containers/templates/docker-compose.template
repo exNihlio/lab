@@ -3,8 +3,8 @@ services:
   registry:
     environment:
       REGISTRY_HTTP_ADDR: "0.0.0.0:5443"
-      REGISTRY_HTTP_TLS_CERTIFICATE: "/ssl/certs/lab_registry.pem"
-      REGISTRY_HTTP_TLS_KEY: "/ssl/private/lab_registry_key.pem"
+      REGISTRY_HTTP_TLS_CERTIFICATE: "/ssl/certs/fullchain.pem"
+      REGISTRY_HTTP_TLS_KEY: "/ssl/certs/privkey.pem"
     image: "{{ registry.image }}:{{ registry.tag }}"
     network_mode: "host"
     ports:
@@ -12,5 +12,4 @@ services:
     restart: unless-stopped
     volumes:
       - /data/disks/registry/storage:/var/lib/registry
-      - /etc/ssl/certs:/ssl/certs:ro
-      - /etc/ssl/private:/ssl/private:ro
+      - /data/disks/config/certs/live/registry.sami.dog:/ssl/certs:ro
