@@ -5,11 +5,15 @@ services:
       REGISTRY_HTTP_ADDR: "0.0.0.0:5443"
       REGISTRY_HTTP_TLS_CERTIFICATE: "/certs/live/registry.sami.dog/fullchain.pem"
       REGISTRY_HTTP_TLS_KEY: "/certs/live/registry.sami.dog/privkey.pem"
+      REGISTRY_AUTH: htpasswd
+      REGISTRY_AUTH_HTPASSWD_PATH: /auth/htpasswd
+      REGISTRY_AUTH_HTPASSWD_REALM: Lab Registry Realm
     image: "{{ registry.image }}:{{ registry.tag }}"
     network_mode: "host"
     ports:
       - "5443:5443"
     restart: unless-stopped
     volumes:
+      - /data/disks/registry/auth:/auth:ro
       - /data/disks/registry/storage:/var/lib/registry
       - /data/disks/config/certs:/certs:ro

@@ -3,6 +3,21 @@
     path: /data/disks/registry/storage
     state: directory
 
+- name: Create the registry auth directory
+  file:
+    group: root
+    owner: root
+    mode: 0700
+    path: /data/disks/registry/auth
+    state: directory
+- name: Copy the registry auth directory
+  copy:
+    dst: /data/disks/registry/auth/
+    group: root
+    owner: root
+    mode: 0600
+    src: files/htpasswd
+
 - name: Render Dockerfile template
   template:
     src: templates/docker-compose.template
