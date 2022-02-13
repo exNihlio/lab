@@ -5,7 +5,7 @@ storage "file" {
 listener "tcp" {
       address = "0.0.0.0:8200"
       tls_enable = true
-      tls_cert_file = "/data/disks/config/certs/live/vault.sami.dog/cert.pem"
+      tls_cert_file = "/data/disks/config/certs/live/vault.sami.dog/fullchain.pem"
       tls_key_file = "/data/disks/config/certs/live/vault.sami.dog/privkey.pem"
 }
 
