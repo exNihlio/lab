@@ -10,9 +10,11 @@
     mode: 0700
     path: /data/disks/registry/auth
     state: directory
-- name: Copy the registry auth directory
+
+- name: Copy the registry auth file
   copy:
-    dst: /data/disks/registry/auth/
+    decrypt: True
+    dest: /data/disks/registry/auth/
     group: root
     owner: root
     mode: 0600
