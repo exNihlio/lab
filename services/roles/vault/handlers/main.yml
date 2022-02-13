@@ -1,0 +1,6 @@
+- name: Restart Vault
+  systemd:
+    name: vault
+    state: restart
+  listen:
+    - restart-vault

@@ -75,6 +75,7 @@
     owner: vault
     path: /opt/vault/ssl/vault.pem
     provider: ownca
+  notify: restart-vault
 
 - name: Start Vault
   systemd:
