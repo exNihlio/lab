@@ -39,12 +39,12 @@
     common_name: "{{ intermediate_ca.common_name }}"
     country_name: "{{ intermediate_ca.country_name }}"
     force: false
-    locality_name: "{{ intermediate_ca.common_name }}"
-    organization_name: "{{ intermediate_ca.common_name }}"
-    organizational_unit_name: "{{ intermediate_ca.common_name }}"
+    locality_name: "{{ intermediate_ca.locality_name }}"
+    organization_name: "{{ intermediate_ca.organization_name }}"
+    organizational_unit_name: "{{ intermediate_ca.organization_unit_name }}"
     path: /etc/ssl/private/lab_intermediate_ca.csr
     privatekey_path: /etc/ssl/private/lab_intermediate_ca_key.pem
-    state_or_province_name: "{{ intermediate_ca.common_name }}"
+    state_or_province_name: "{{ intermediate_ca.state_or_province_name }}"
 
 - name: Create intermediate CA cert
   openssl_certificate:
