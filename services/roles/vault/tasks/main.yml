@@ -39,43 +39,43 @@
     owner: vault
     src: templates/vault-server.template
 
-- name: Create Vault x509 keyG
-  openssl_privatekey:
-    force: false
-    group: vault
-    mode: 0600
-    owner: vault
-    path: /opt/vault/ssl/vault_key.pem
-    size: "{{ vault.x509.key }}"
-    type: "{{ vault.x509.type }}"
-
-- name: Create Vault x509 CSR
-  openssl_csr:
-    common_name: "{{ vault.x509.common_name }}"
-    country_name: "{{ vault.x509.country_name }}"
-    force: false
-    group: vault
-    locality_name: "{{ vault.x509.locality_name }}"
-    mode: 0644
-    owner: vault
-    organization_name: "{{ vault.x509.organization_name }}"
-    organizational_unit_name: "{{ vault.x509.organizational_unit_name }}"
-    path: /etc/ssl/vault.csr
-    privatekey_path: /opt/vault/ssl/vault_key.pem
-    state_or_province_name: "{{ vault.x509.state_or_province_name }}"
-
-- name: Create Vault x509 cert
-  openssl_certificate:
-    csr_path: /etc/ssl/vault.csr
-    force: true
-    group: vault
-    mode: 0644
-    ownca_path: /etc/ssl/certs/lab_intermediate_ca.pem
-    ownca_privatekey_path: /etc/ssl/private/lab_intermediate_ca_key.pem 
-    owner: vault
-    path: /opt/vault/ssl/vault.pem
-    provider: ownca
-  notify: restart-vault
+##- name: Create Vault x509 keyG
+##  openssl_privatekey:
+##    force: false
+##    group: vault
+##    mode: 0600
+##    owner: vault
+##    path: /opt/vault/ssl/vault_key.pem
+##    size: "{{ vault.x509.key }}"
+##    type: "{{ vault.x509.type }}"
+##
+##- name: Create Vault x509 CSR
+##  openssl_csr:
+##    common_name: "{{ vault.x509.common_name }}"
+##    country_name: "{{ vault.x509.country_name }}"
+##    force: false
+##    group: vault
+##    locality_name: "{{ vault.x509.locality_name }}"
+##    mode: 0644
+##    owner: vault
+##    organization_name: "{{ vault.x509.organization_name }}"
+##    organizational_unit_name: "{{ vault.x509.organizational_unit_name }}"
+##    path: /etc/ssl/vault.csr
+##    privatekey_path: /opt/vault/ssl/vault_key.pem
+##    state_or_province_name: "{{ vault.x509.state_or_province_name }}"
+##
+##- name: Create Vault x509 cert
+##  openssl_certificate:
+##    csr_path: /etc/ssl/vault.csr
+##    force: true
+##    group: vault
+##    mode: 0644
+##    ownca_path: /etc/ssl/certs/lab_intermediate_ca.pem
+##    ownca_privatekey_path: /etc/ssl/private/lab_intermediate_ca_key.pem 
+##    owner: vault
+##    path: /opt/vault/ssl/vault.pem
+##    provider: ownca
+##  notify: restart-vault
 
 - name: Start Vault
   systemd:
