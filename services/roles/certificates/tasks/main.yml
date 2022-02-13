@@ -84,7 +84,7 @@
 - name: Create service x509 cert
   openssl_certificate:
     csr_path: /etc/ssl/private/lab_{{ item.name }}.csr
-    force: false
+    force: true
     mode: 0644
     ownca_path: /etc/ssl/certs/lab_intermediate_ca.pem
     ownca_privatekey_path: /etc/ssl/private/lab_intermediate_ca_key.pem

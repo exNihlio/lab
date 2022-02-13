@@ -67,7 +67,7 @@
 - name: Create Vault x509 cert
   openssl_certificate:
     csr_path: /etc/ssl/vault.csr
-    force: false
+    force: true
     group: vault
     mode: 0644
     ownca_path: /etc/ssl/certs/lab_intermediate_ca.pem
