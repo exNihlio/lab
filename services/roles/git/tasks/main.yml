@@ -32,7 +32,7 @@
 
 - name: Install Gitea
   copy:
-    dest: /usr/loca/bin/gitea
+    dest: /usr/local/bin/gitea
     src: /tmp/gitea-{{ gitea.release.current }}-linux-amd64
     mode: 0750
     owner: git
