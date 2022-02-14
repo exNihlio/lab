@@ -35,8 +35,8 @@
     dest: /usr/local/bin/gitea
     src: /tmp/gitea-{{ gitea.release.current }}-linux-amd64
     mode: 0750
-    owner: git
-    group: git
+    owner: gitea
+    group: gitea
 
 - name: Deploy Gitea systemd unit file
   copy:
