@@ -29,13 +29,14 @@
   get_url:
     dest: /tmp/
     url: "https://dl.gitea.io/gitea/{{gitea.release.current}}/gitea-{{gitea.release.current}}-linux-amd64"
+
 - name: Install Gitea
-  unarchive:
+  copy:
     dest: /usr/loca/bin/gitea
     src: /tmp/gitea-{{ gitea.release.current }}-linux-amd64
-    mode: 0755
-    owner: root
-    group: root
+    mode: 0750
+    owner: git
+    group: git
 
 - name: Deploy Gitea systemd unit file
   copy:
