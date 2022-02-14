@@ -27,7 +27,7 @@
 
 - name: Download Gitea
   get_url:
-    dest: /tmp/
+    dest: /tmp/gitea-{{gitea.release.current}}-linux-amd64
     url: "https://dl.gitea.io/gitea/{{gitea.release.current}}/gitea-{{gitea.release.current}}-linux-amd64"
 
 - name: Install Gitea
