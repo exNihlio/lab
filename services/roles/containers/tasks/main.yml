@@ -11,6 +11,14 @@
     path: /data/disks/registry/auth
     state: directory
 
+- name: Create the Portainer storage directory
+  file:
+    group: root
+    path: /data/disks/config/portainer/storage
+    owner: root
+    state: directory
+    mode: 0700
+
 - name: Copy the registry auth file
   copy:
     decrypt: True

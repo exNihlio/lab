@@ -17,3 +17,13 @@ services:
       - /data/disks/registry/auth:/auth:ro
       - /data/disks/registry/storage:/var/lib/registry
       - /data/disks/config/certs:/certs:ro
+  portainer:
+    command: --sslcert /certs/live/portainer.sami.dog/fullchain.pem --sslkey /certs/live/portainer.sami.dog/privkey.pem
+    image: "{{ portainer.image }}:{{ portainer.tag }}"
+    network_mode: "host"
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /data/disks/config/certs:/certs:ro
+      - /data/disks/config/portainer/storage:/data
+     
