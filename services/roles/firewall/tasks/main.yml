@@ -119,6 +119,29 @@
     rule: "allow"
   loop: "{{ ufw.plex.gdm.ports }}"
 
+###################
+#### Portainer ####
+###################
+- name: Set Portainer web port
+  ufw:
+    comment: "Portainer Web Port"
+    port: "{{ ufw.portainer.web.port }}"
+    proto: "tcp"
+    rule: "allow"
+    src: "{{ item }}"
+  loop: "{{ ufw.portainer.hosts }}"
+###############
+#### Gitea ####
+###############
+- name: Set Gitea web port
+  ufw:
+    comment: "Gitea Web Port"
+    port: "{{ ufw.gitea.web.port }}"
+    proto: "tcp"
+    rule: "allow"
+    src: "{{ item }}"
+  loop: "{{ ufw.gitea.hosts }}"
+
 - name: Set UFW policy
   ufw:
     state: "{{ ufw.state }}"
