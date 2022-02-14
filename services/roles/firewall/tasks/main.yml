@@ -130,6 +130,7 @@
     rule: "allow"
     src: "{{ item }}"
   loop: "{{ ufw.portainer.hosts }}"
+
 ###############
 #### Gitea ####
 ###############

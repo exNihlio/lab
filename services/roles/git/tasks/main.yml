@@ -1,0 +1,50 @@
+- name: Create Gitea user
+  user:
+    comment: "Git Version control"
+    create_home: False
+    name: gitea
+    shell: /usr/bin/false
+    system: True
+
+- name: Create Git config directory
+  file:
+    group: gitea
+    owner: gitea
+    path: /etc/gitea
+    state: directory
+
+- name: Create Gitea storage directories
+  file:
+    group: gitea
+    mode: 0750
+    owner: gitea
+    path: /var/lib/gitea/{{ item }}
+    state: directory
+  loop:
+    - "custom"
+    - "data"
+    - "log"
+
+- name: Download Gitea
+  get_url:
+    dest: /tmp/
+    url: "https://dl.gitea.io/gitea/{{gitea.release.current}}/gitea-{{gitea.release.current}}-linux-amd64"
+- name: Install Gitea
+  unarchive:
+    dest: /usr/loca/bin/gitea
+    src: /tmp/gitea-{{ gitea.release.current }}-linux-amd64
+    mode: 0755
+    owner: root
+    group: root
+
+- name: Deploy Gitea systemd unit file
+  copy:
+    dest: /usr/lib/systemd/system/
+    src: gitea
+    mode: 0640
+
+- name: Start Gitea
+  systemd:
+    enabled: True
+    name: gitea
+    state: started
