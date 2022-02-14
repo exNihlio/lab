@@ -15,9 +15,9 @@
   file:
     group: root
     path: /data/disks/config/portainer/storage
+    mode: 0700
     owner: root
     state: directory
-    mode: 0700
 
 - name: Copy the registry auth file
   copy:
