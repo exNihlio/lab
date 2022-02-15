@@ -31,7 +31,7 @@ services:
       - /data/disks/config/certs:/certs:ro
       - /data/disks/config/portainer/storage:/data
   minio:
-    command: server /data --certs-dir /certs/live/{{ minio.hostname }}.{{ minio.domainname }} --console-address ":9001" https://minio.{{ minio.domainname }}
+    command: server /data --certs-dir /certs/ --console-address ":9001"
     domainname: "{{ minio.domainname }}"
     hostname: "{{ minio.hostname }}"
     environment:
