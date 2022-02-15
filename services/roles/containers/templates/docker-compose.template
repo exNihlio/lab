@@ -40,7 +40,7 @@ services:
       MINIO_ROOT_USER: "{{ minio.root_user }}"
       MINIO_ROOT_PASSWORD: "{{ minio.root_password }}"
     image: "{{ minio.image }}:{{ minio.tag }}"
-    publish:
+    ports:
       - "9000:443"
       - "9001:9001"
     restart: unless-stopped
