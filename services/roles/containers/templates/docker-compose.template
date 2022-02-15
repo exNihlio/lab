@@ -1,6 +1,7 @@
 version: "3"
 services:
   registry:
+    domainname: "{{ registry.domainname }}"
     environment:
       REGISTRY_HTTP_ADDR: "0.0.0.0:5443"
       REGISTRY_HTTP_TLS_CERTIFICATE: "/certs/live/registry.sami.dog/fullchain.pem"
@@ -8,6 +9,7 @@ services:
       REGISTRY_AUTH: htpasswd
       REGISTRY_AUTH_HTPASSWD_PATH: /auth/htpasswd
       REGISTRY_AUTH_HTPASSWD_REALM: Lab Registry Realm
+    hostname: "{{ registry.hostname }}"
     image: "{{ registry.image }}:{{ registry.tag }}"
     network_mode: "host"
     ports:
@@ -19,6 +21,8 @@ services:
       - /data/disks/config/certs:/certs:ro
   portainer:
     command: --sslcert /certs/live/portainer.sami.dog/fullchain.pem --sslkey /certs/live/portainer.sami.dog/privkey.pem
+    domainname: "{{ registry.domainname }}"
+    hostname: "{{ registry.hostname }}"
     image: "{{ portainer.image }}:{{ portainer.tag }}"
     network_mode: "host"
     restart: unless-stopped
@@ -26,4 +30,16 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - /data/disks/config/certs:/certs:ro
       - /data/disks/config/portainer/storage:/data
-     
+  minio:
+    command: server /data --certs-dir /certs/live/{{ minio.hostname }}.{{ mino.domain }} --console-address ":9001" https://minio.{{ minio.domainname }}
+    domainname: "{{ minio.domainname }}"
+    hostname: "{{ minio.hostname }}"
+    environment:
+      MINIO_ROOT_USER: "{{ minio.root_user }}"
+      MINIO_ROOT_PASSWORD: "{{ minio.root_password }}"
+    image: "{{ minio.image }}:{{ minio.tag }}"
+    network_mode: "host"
+    restart: unless-stopped
+    volumes:
+      - /data/disks/minio:/data
+      - /data/disks/config/certs:/certs:ro
