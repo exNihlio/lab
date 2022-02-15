@@ -31,14 +31,18 @@ services:
       - /data/disks/config/certs:/certs:ro
       - /data/disks/config/portainer/storage:/data
   minio:
-    command: server /data --certs-dir /certs/ --console-address ":9001"
+    command: server /data --certs-dir /certs/ --address ":443"
     domainname: "{{ minio.domainname }}"
+    environment:
+      MINIO_SERVER_URL: "https://{{ minio.hostname }}.{{ minio.domainname }}:9001"
     hostname: "{{ minio.hostname }}"
     environment:
       MINIO_ROOT_USER: "{{ minio.root_user }}"
       MINIO_ROOT_PASSWORD: "{{ minio.root_password }}"
     image: "{{ minio.image }}:{{ minio.tag }}"
-    network_mode: "host"
+    publish:
+      - "9000:443"
+      - "9001:9001"
     restart: unless-stopped
     volumes:
       - /data/disks/minio:/data
