@@ -30,18 +30,18 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - /data/disks/config/certs:/certs:ro
       - /data/disks/config/portainer/storage:/data
-  minio:
-    command: server /data --certs-dir /certs/ --address ":9000" --console-address ":9001"
-    domainname: "{{ minio.domainname }}"
-    environment:
-      MINIO_SERVER_URL: "https://{{ minio.hostname }}.{{ minio.domainname }}"
-    hostname: "{{ minio.hostname }}"
-    environment:
-      MINIO_ROOT_USER: "{{ minio.root_user }}"
-      MINIO_ROOT_PASSWORD: "{{ minio.root_password }}"
-    image: "{{ minio.image }}:{{ minio.tag }}"
-    network_mode: "host"
-    restart: unless-stopped
-    volumes:
-      - /data/disks/minio:/data
-      - /data/disks/config/miniocerts:/certs
+        #minio:
+        #  command: server /data --certs-dir /certs/ --address ":9000" --console-address ":9001"
+        #  domainname: "{{ minio.domainname }}"
+        #  environment:
+        #    MINIO_SERVER_URL: "https://{{ minio.hostname }}.{{ minio.domainname }}"
+        #  hostname: "{{ minio.hostname }}"
+        #  environment:
+        #    MINIO_ROOT_USER: "{{ minio.root_user }}"
+        #    MINIO_ROOT_PASSWORD: "{{ minio.root_password }}"
+        #  image: "{{ minio.image }}:{{ minio.tag }}"
+        #  network_mode: "host"
+        #  restart: unless-stopped
+        #  volumes:
+        #    - /data/disks/minio:/data
+        #    - /data/disks/config/miniocerts:/certs
