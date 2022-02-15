@@ -42,4 +42,4 @@ services:
     restart: unless-stopped
     volumes:
       - /data/disks/minio:/data
-      - /data/disks/config/certs:/certs:ro
+      - /data/disks/config/miniocerts:/certs
