@@ -1,3 +1,4 @@
 gitea:
+  url: "https://repo.sami.dog:2010/gitea"
   release:
     current: "1.16.1"  
