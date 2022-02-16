@@ -142,8 +142,20 @@
     rule: "allow"
     src: "{{ item }}"
   loop: "{{ ufw.gitea.hosts }}"
+###############################
+#### Nginx Package Service ####
+###############################
+- name: Set Nginx TLS port
+  ufw:
+    comment: "Nginx package port"
+    port: "{{ ugw.nginx.tls.port }}"
+    proto: "tcp"
+    rule: "allow"
+    src: "{{ item }}"
+  loop: "{{ ufw.nginx.hosts }}"
 
 - name: Set UFW policy
   ufw:
     state: "{{ ufw.state }}"
     policy: "{{ ufw.policy }}"
+
