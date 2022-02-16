@@ -28,7 +28,7 @@
 - name: Install Gitea
   get_url:
     dest: /usr/local/bin/gitea
-    src: "{{ gitea.url}}/gitea-{{ gitea.release.current }}-linux-amd64"
+    url: "{{ gitea.url}}/gitea-{{ gitea.release.current }}-linux-amd64"
     mode: 0750
     owner: gitea
     group: gitea
