@@ -30,6 +30,17 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - /data/disks/config/certs:/certs:ro
       - /data/disks/config/portainer/storage:/data
+  repo:
+    domainname: "{{ repo.domainname }}"
+    hostname: "{{ repo.hostname }}"
+    image: "{{ repo.image }}:{{ repo.tag }}"
+    network_mode: "host"
+    restart: "unless-stopped"
+    volumes:
+      - /data/disks/nginx/repos:/usr/share/nginx/html:ro
+      - /data/disks/nginx/conf:/etc/nginx:ro
+      - /data/disks/config/certs:/certs:ro
+
         #minio:
         #  command: server /data --certs-dir /certs/ --address ":9000" --console-address ":9001"
         #  domainname: "{{ minio.domainname }}"

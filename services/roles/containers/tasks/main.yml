@@ -28,6 +28,14 @@
     mode: 0600
     src: files/htpasswd
 
+- name: Copy the nginx conf file
+  copy:
+    dest: /data/disks/nginx/conf/
+    owner: root
+    group: root
+    mode: 0600
+    src: files/nginx.conf
+
 - name: Render Dockerfile template
   template:
     src: templates/docker-compose.template
