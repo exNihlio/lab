@@ -25,15 +25,10 @@
     - "data"
     - "log"
 
-- name: Download Gitea
-  get_url:
-    dest: /tmp/gitea-{{gitea.release.current}}-linux-amd64
-    url: "https://dl.gitea.io/gitea/{{gitea.release.current}}/gitea-{{gitea.release.current}}-linux-amd64"
-
 - name: Install Gitea
-  copy:
+  get_url:
     dest: /usr/local/bin/gitea
-    src: /tmp/gitea-{{ gitea.release.current }}-linux-amd64
+    src: "{{ gitea.url}}/gitea-{{ gitea.release.current }}-linux-amd64"
     mode: 0750
     owner: gitea
     group: gitea
