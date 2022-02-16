@@ -38,7 +38,7 @@ services:
     restart: "unless-stopped"
     volumes:
       - /data/disks/nginx/repos:/usr/share/nginx/html:ro
-      - /data/disks/nginx/conf:/etc/nginx:ro
+      - /data/disks/nginx/conf:/etc/nginx/conf.d:ro
       - /data/disks/config/certs:/certs:ro
 
         #minio:
