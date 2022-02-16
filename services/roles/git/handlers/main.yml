@@ -2,7 +2,7 @@
   systemd:
     enabled: true
     name: gitea
-    state: restart
+    state: restarted
     daemon_reload: True
   listen:
     - restart-gitea
