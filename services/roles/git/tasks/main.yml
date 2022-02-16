@@ -38,6 +38,8 @@
     dest: /usr/lib/systemd/system/
     src: files/gitea.service
     mode: 0640
+  notify:
+    - restart-gitea
 
 - name: Start Gitea
   systemd:

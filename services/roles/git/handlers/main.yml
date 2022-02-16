@@ -1,0 +1,8 @@
+- name: Restart Gitea
+  systemd:
+    enabled: true
+    name: gitea
+    state: restart
+    daemon_reload: True
+  listen:
+    - restart-gitea
