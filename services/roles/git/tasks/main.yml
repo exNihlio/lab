@@ -36,7 +36,7 @@
 - name: Deploy Gitea systemd unit file
   copy:
     dest: /usr/lib/systemd/system/
-    src: gitea
+    src: files/gitea.service
     mode: 0640
 
 - name: Start Gitea
