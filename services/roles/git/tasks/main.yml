@@ -1,7 +1,7 @@
 - name: Create Gitea user
   user:
     comment: "Git Version control"
-    create_home: False
+    create_home: True
     name: gitea
     shell: /usr/bin/false
     system: True
