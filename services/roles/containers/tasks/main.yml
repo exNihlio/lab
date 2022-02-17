@@ -29,7 +29,7 @@
     src: files/htpasswd
 
 - name: Copy the nginx conf file
-  copy:
+  template:
     dest: /data/disks/nginx/conf/nginx.conf
     owner: root
     group: root
