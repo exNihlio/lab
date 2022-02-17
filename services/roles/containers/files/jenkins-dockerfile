@@ -1,0 +1,7 @@
+FROM jenkins/jenkins:lts-jdk11
+
+COPY --chown jenkens:jenkins /data/disks/config/certs/live/jenkins.sami.dog/fullchain.pem /var/lib/jenkins/cert.pem
+
+COPY --chown jenkens:jenkins /data/disks/config/certs/live/jenkins.sami.dog/privkey.pem /var/lib/jenkins/key.pem
+
+ENV JENKINS_OPTS --httpPort=-1 --httpsPort=-8443 --httpsCertificate=/var/lib/jenkinss/cert.pem --httpsPrivateKey=/var/lib/jenkinss/key.pem
