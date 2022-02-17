@@ -36,3 +36,19 @@ deploying Jenkins next.
 Currently eyeing Ignite. We need something simple to quickly launch VMs that will host various experiments, whether that is
 something like OpenNebula, K8s hosts, new some fancy distributed system, etc. Ignite checks a lot of boxes and it's declarative
 configuration is highly attractive.
+
+
+## Ports and Protocols
+
+|Port | Protocol | Usage | Service         |
+|-----|----------|-------|-----------------|
+|:22  | TCP      | SSH   | Various         |
+|:53  | UDP/TCP  | DNS   | Pihole          |
+|:67  | UDP      | DHCP  | Pihole          |
+|:80  | TCP      | HTTP  | Pihole          |
+|:443 | TCP      | HTTPS | Pihole          |
+|:2010| TCP      | HTTPS | Nginx           |
+|:3000| TCP      | HTTPS | Gitea           |
+|:5443| TCP      | HTTPS | Docker Registry |
+|:8200| TCP      | HTTPS | Vault           |
+|:9443| TCP      | HTTPS | Portainer       |
