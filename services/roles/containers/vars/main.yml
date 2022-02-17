@@ -10,6 +10,11 @@ portainer:
   tag: "2.11.0-alpine"
   tag: "RELEASE.2022-02-01T18-00-14Z"
 repo:
+  allowed_hosts:
+    - "127.0.0.1"
+    - "10.1.10.20"
+    - "10.1.10.153"
+    - "10.1.10.156"
   domainname: "sami.dog"
   hostname: "repo"
   image: "nginx"
@@ -18,5 +23,6 @@ jenkins:
   domainname: "sami.dog"
   hostname: "jenkins"
   image: "jenkins/jenkins"
-  ## In product we would
-  tag: "lts-jdk11"
+  ## In production we would use a more
+  ## specific tag, but this only our lab
+  tag: "lts-jdk11

@@ -34,11 +34,14 @@
     owner: root
     group: root
     mode: 0600
-    src: files/nginx.conf
+    src: templates/nginx.j2
+  notify:
+    - validate-nginx-conf
+    - restart-nginx
 
 - name: Render Dockerfile template
   template:
-    src: templates/docker-compose.template
+    src: templates/docker-compose.j2
     dest: ./docker-compose.yml
 
 - name: Deploy the containers

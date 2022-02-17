@@ -1,0 +1,9 @@
+- name: Validate Nginx Config
+  shell: docker exec {{ nginx_container }} nginx -t
+  listen:
+    - validate-nginx-conf
+
+- name: Restart Nginx
+  shell: docker exec {{ nginx_container }} nginx -s reload
+  listen:
+    - restart-nginx

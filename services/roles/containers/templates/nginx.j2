@@ -5,7 +5,9 @@ server {
   ssl_certificate_key /certs/live/repo.sami.dog/privkey.pem;
   root /usr/share/nginx/html;
   location / {
-    allow all;
+    {% for host in repo.allowed_hosts %}
+    allow {{ host }}
+    {% endfor %}
     sendfile on;
     sendfile_max_chunk 1m;
     autoindex on;
