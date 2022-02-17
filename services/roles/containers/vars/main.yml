@@ -23,6 +23,5 @@ jenkins:
   domainname: "sami.dog"
   hostname: "jenkins"
   image: "jenkins/jenkins"
-  ## In production we would use a more
-  ## specific tag, but this only our lab
-  tag: "lts-jdk11
+  ## In production we would use a more specific tag, but this only our lab
+  tag: "lts-jdk11"
