@@ -30,7 +30,7 @@
 
 - name: Copy the nginx conf file
   copy:
-    dest: /data/disks/nginx/conf/
+    dest: /data/disks/nginx/conf/nginx.conf
     owner: root
     group: root
     mode: 0600
