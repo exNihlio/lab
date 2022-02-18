@@ -43,6 +43,7 @@ services:
 
   jenkins:
     build:
+      image: "{{ jenkins.image }}:{{ jenkins.tag}}"
       context: "./roles/containers/files"
       dockerfile: "jenkins-dockerfile"
     domainname: "{{ jenkins.domainname }}"
