@@ -39,6 +39,24 @@
     - validate-nginx-conf
     - restart-nginx
 
+- name: Copy the LetsEncrypt cert to the buildcontext
+  copy:
+    dest: .
+    group: root
+    owner: root
+    mode: 0700
+    src: /data/disks/config/certs/{{ jenkins.hostname }}.{{ jenkins.domainname }}/fullchain.pem
+  when: "{{ jenkins.rebuild }}" == true
+
+- name: Copy the LetsEncrypt key to the buildcontext
+  copy:
+    dest: .
+    group: root
+    owner: root
+    mode: 0700
+    src: /data/disks/config/certs/{{ jenkins.hostname }}.{{ jenkins.domainname }}/privkey.pem
+  when: "{{ jenkins.rebuild }}" == true
+
 - name: Render Dockerfile template
   template:
     src: templates/docker-compose.j2
@@ -48,3 +66,15 @@
   docker_compose:
     project_src: .
     state: present
+
+- name: Delete the LetsEncrypt cert from the buildcontext
+  file:
+    path: ./privkey.pem
+    state: absent
+  when: "{{ jenkins.rebuild }}" == true
+
+- name: Delete the LetsEncrypt cert from the buildcontext
+  file:
+    path: ./fullchain.pem
+    state: absent
+  when: "{{ jenkins.rebuild }}" == true
