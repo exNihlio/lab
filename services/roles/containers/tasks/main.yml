@@ -64,7 +64,7 @@
     state: absent
   when: jenkins.rebuild == true
 
-- name: Delete the LetsEncrypt cert from the buildcontext
+- name: Delete the LetsEncrypt key from the buildcontext
   file:
     path: ./fullchain.pem
     state: absent
