@@ -76,10 +76,36 @@
       - source: drone-db
         target: /data
         type: volume
+      - source: /var/run/docker.sock
+        target: /var/run/docker.dock
+        type: bind
     name: "services_drone_server"
     network_mode: "bridge"
     ports:
       - "10443:443"
+    restart_policy: "unless-stopped"
+    state: "started"
+
+- name: Deploy Drone Runner
+  docker_container:
+    detach: true
+    dns_servers:
+      - "10.1.10.20"
+    domainname: "{{ cicd.domainname }}"
+    etc_hosts:
+      git.sami.dog: 10.1.10.20
+    env:
+      DRONE_RPC_SECRET: "{{ cicd.rpc_token }}"
+      DRONE_RPC_PROTO: "https"
+      DRONE_RPC_HOST: "{{cicd.hostname}}.{{cicd.domainname}}"
+      DRONE_RUNNER_NAME: "${HOSTNAME}-runner"
+      DRONE_RUNNER_CAPACITY: 2
+      DRONE_RUNNER_NETWORKS: "bridge"
+    image: "{{ cicd.runner_image }}:{{ cicd.runner_tag }}"
+    mounts:
+      - /var/run/docker.sock:/var/run/docker.sock
+    name: "services_drone_runner"
+    network_mode: "bridge"
     restart_policy: "unless-stopped"
     state: "started"
 
