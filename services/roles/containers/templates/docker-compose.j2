@@ -48,8 +48,7 @@ services:
     domainname: "{{ jenkins.domainname }}"
     hostname: "{{ jenkins.hostname }}"
     image: "{{ jenkins.image }}:{{jenkins.tag}}"
-    networks:
-      - "bridge"
+    network_mode: "bridge"
     ports:
       - "8443:8443"
     volumes:
