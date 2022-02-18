@@ -46,6 +46,8 @@
   docker_container:
     detach: true
     domainname: "{{ cicd.domainname }}"
+    etc_hosts:
+      - "git.sami.dog 10.1.10.20"
     env:
       DRONE_DATABASE_DATASOURCE: "/data/database.sqlite"
       DRONE_DATABASE_DRIVER: "sqlite3"
