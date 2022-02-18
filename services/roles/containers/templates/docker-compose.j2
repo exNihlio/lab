@@ -50,7 +50,7 @@ services:
     image: "{{ jenkins.image }}:{{jenkins.tag}}"
     networks:
       - "bridge"
-    publish:
+    ports:
       - "8443:8443"
     tag: "{{ jenkins.tag }}"
     volumes:
