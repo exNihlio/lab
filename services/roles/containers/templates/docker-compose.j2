@@ -40,14 +40,14 @@ services:
       - /data/disks/nginx/repos:/usr/share/nginx/html:ro
       - /data/disks/nginx/conf:/etc/nginx/conf.d:ro
       - /data/disks/config/certs:/certs:ro
-  {#
+
   jenkins:
     build:
       context: "./roles/containers/files"
       dockerfile: "jenkins-dockerfile"
     domainname: "{{ jenkins.domainname }}"
     hostname: "{{ jenkins.hostname }}"
-    image: "{{ jenkins.image }}"
+    image: "{{ jenkins.image }}:{{jenkins.tag}}"
     networks:
       - "bridge"
     publish:
@@ -55,6 +55,5 @@ services:
     tag: "{{ jenkins.tag }}"
     volumes:
       - "jenkinshome:/var/jenkins_home"
-#volumes:
-#  jenkinshome:
-#}
+volumes:
+  jenkinshome:
