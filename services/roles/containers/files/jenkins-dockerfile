@@ -1,9 +1,9 @@
 FROM jenkins/jenkins:lts-jdk11
 
-COPY --chown=jenkins:jenkins fullchain.pem /var/lib/jenkins/cert.pem
+COPY --chown=jenkins:jenkins fullchain.pem /var/lib/jenkins/cert
 
-COPY --chown=jenkins:jenkins privkey.pem /var/lib/jenkins/key.pem
+COPY --chown=jenkins:jenkins privkey.pem /var/lib/jenkins/key
 
-ENV JENKINS_OPTS --httpPort=-1 --httpsPort=8443 --httpsCertificate=/var/lib/jenkins/cert.pem --httpsPrivateKey=/var/lib/jenkins/key.pem
+ENV JENKINS_OPTS --httpPort=-1 --httpsPort=8443 --httpsCertificate=/var/lib/jenkins/cert --httpsPrivateKey=/var/lib/jenkins/key
 
 EXPOSE 8443
