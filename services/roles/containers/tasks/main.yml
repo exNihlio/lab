@@ -70,6 +70,7 @@
     name: "services_drone_server"
     network_mode: "bridge"
     ports:
+      - "8008:80"
       - "8443:443"
     restart_policy: "unless-stopped"
     state: "started"
