@@ -38,23 +38,14 @@
   notify:
     - validate-nginx-conf
     - restart-nginx
-
+## This is not idempotent. But it wouddn't be
+## with `copy` either.
 - name: Copy the LetsEncrypt cert to the buildcontext
-  copy:
-    dest: .
-    group: root
-    owner: root
-    mode: 0700
-    src: /data/disks/config/certs/live/{{ jenkins.hostname }}.{{ jenkins.domainname }}/fullchain.pem
+  command: cp  "{{ cert_dir }}/{{ jenkins.hostname }}.{{ jenkins.domainname }}/fullchain.pem" .
   when: jenkins.rebuild == true
 
 - name: Copy the LetsEncrypt key to the buildcontext
-  copy:
-    dest: .
-    group: root
-    owner: root
-    mode: 0700
-    src: /data/disks/config/certs/live/{{ jenkins.hostname }}.{{ jenkins.domainname }}/privkey.pem
+  command: cp  "{{ cert_dir }}/{{ jenkins.hostname }}.{{ jenkins.domainname }}/privkey.pem" .
   when: jenkins.rebuild == true
 
 - name: Render Dockerfile template

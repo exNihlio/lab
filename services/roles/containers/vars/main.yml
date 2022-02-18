@@ -1,3 +1,4 @@
+cert_dir: "/data/disks/config/certs/live"
 registry:
   domainname: "sami.dog"
   hostname: "registry"
