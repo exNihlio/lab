@@ -48,6 +48,8 @@
     dns_servers:
       - "10.1.10.20"
     domainname: "{{ cicd.domainname }}"
+    etc_hosts:
+      10.1.10.20: "git.sami.dog"
     env:
       DRONE_DATABASE_DATASOURCE: "/data/database.sqlite"
       DRONE_DATABASE_DRIVER: "sqlite3"
