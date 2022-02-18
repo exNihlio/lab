@@ -52,7 +52,6 @@ services:
       - "bridge"
     ports:
       - "8443:8443"
-    tag: "{{ jenkins.tag }}"
     volumes:
       - "jenkinshome:/var/jenkins_home"
 volumes:
