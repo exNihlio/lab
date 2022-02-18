@@ -48,7 +48,6 @@
     dns_servers:
       - "10.1.10.20"
     domainname: "{{ cicd.domainname }}"
-    etc_hosts:
     env:
       DRONE_DATABASE_DATASOURCE: "/data/database.sqlite"
       DRONE_DATABASE_DRIVER: "sqlite3"
