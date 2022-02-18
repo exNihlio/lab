@@ -98,6 +98,7 @@
       DRONE_RUNNER_NAME: "${HOSTNAME}-runner"
       DRONE_RUNNER_CAPACITY: 2
       DRONE_RUNNER_NETWORKS: "bridge"
+    hostname: "runner-1"
     image: "{{ cicd.runner_image }}:{{ cicd.runner_tag }}"
     mounts:
       - /var/run/docker.sock:/var/run/docker.sock
