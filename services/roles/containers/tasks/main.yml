@@ -52,7 +52,7 @@
       DRONE_GIT_PASSWORD: "{{ cicd.gitpassword }}"
       DRONE_GIT_USERNAME: "{{ cicd.gitusername }}"
       DRONE_GITEA_SERVER: "https://git.sami.dog:3000"
-      DRONE_LOGS_DEBUG: true
+      DRONE_LOGS_DEBUG: "true"
       DRONE_SERVER_HOST: "{{ cicd.hostname }}.{{ cicd.domainname }}"
       DRONE_SERVER_PROTO: "https"
       DRONE_TLS_CERT: "{{ certpath }}/live/{{ cicd.hostname }}.{{cicd.domainname }}/fullchain.pem"
