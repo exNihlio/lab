@@ -50,6 +50,9 @@
     env:
       DRONE_DATABASE_DATASOURCE: "/data/database.sqlite"
       DRONE_DATABASE_DRIVER: "/sqlite3"
+      DRONE_GIT_PASSWORD: "{{ cicd.gitpassword }}"
+      DRONE_GIT_USERNAME: "{{ cicd.gitusername }}"
+      DRONE_GITEA_SERVER: "https://git.sami.dog:3000"
       DRONE_SERVER_HOST: "{{ cicd.hostname }}.{{ cicd.domainname }}"
       DRONE_SERVER_PROTO: "https"
       DRONE_SERVER_PORT: ":8443"
