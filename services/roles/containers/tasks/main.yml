@@ -45,7 +45,7 @@
     group: root
     owner: root
     mode: 0700
-    src: /data/disks/config/certs/{{ jenkins.hostname }}.{{ jenkins.domainname }}/fullchain.pem
+    src: /data/disks/config/certs/live/{{ jenkins.hostname }}.{{ jenkins.domainname }}/fullchain.pem
   when: jenkins.rebuild == true
 
 - name: Copy the LetsEncrypt key to the buildcontext
@@ -54,7 +54,7 @@
     group: root
     owner: root
     mode: 0700
-    src: /data/disks/config/certs/{{ jenkins.hostname }}.{{ jenkins.domainname }}/privkey.pem
+    src: /data/disks/config/certs/live/{{ jenkins.hostname }}.{{ jenkins.domainname }}/privkey.pem
   when: jenkins.rebuild == true
 
 - name: Render Dockerfile template
