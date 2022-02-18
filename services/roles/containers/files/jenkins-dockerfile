@@ -1,6 +1,6 @@
 FROM jenkins/jenkins:lts-jdk11
 
-COPY --chown=jenkins:jenkins fulllchain.pem /var/lib/jenkins/cert.pem
+COPY --chown=jenkins:jenkins fullchain.pem /var/lib/jenkins/cert.pem
 
 COPY --chown=jenkins:jenkins privkey.pem /var/lib/jenkins/key.pem
 
