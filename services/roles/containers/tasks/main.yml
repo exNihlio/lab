@@ -38,15 +38,6 @@
   notify:
     - validate-nginx-conf
     - restart-nginx
-## This is not idempotent. But it wouddn't be
-## with `copy` either.
-- name: Copy the LetsEncrypt cert to the buildcontext
-  shell: cp  "{{ cert_dir }}/{{ jenkins.hostname }}.{{ jenkins.domainname }}/fullchain.pem" ./roles/containers/files/
-  when: jenkins.rebuild == true
-
-- name: Copy the LetsEncrypt key to the buildcontext
-  shell: cp  "{{ cert_dir }}/{{ jenkins.hostname }}.{{ jenkins.domainname }}/privkey.pem" ./roles/containers/files/
-  when: jenkins.rebuild == true
 
 - name: Render Dockerfile template
   template:
@@ -57,15 +48,3 @@
   docker_compose:
     project_src: .
     state: present
-
-- name: Delete the LetsEncrypt cert from the buildcontext
-  file:
-    path: ./roles/containers/files/privkey.pem
-    state: absent
-  when: jenkins.rebuild == true
-
-- name: Delete the LetsEncrypt key from the buildcontext
-  file:
-    path: ./roles/containers/files/fullchain.pem
-    state: absent
-  when: jenkins.rebuild == true
