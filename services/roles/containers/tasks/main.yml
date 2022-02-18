@@ -45,6 +45,8 @@
 - name: Start Drone Server
   docker_container:
     detach: true
+    dns_servers:
+      - "10.1.10.20"
     domainname: "{{ cicd.domainname }}"
     etc_hosts:
       git.sami.dog: 10.1.10.20
