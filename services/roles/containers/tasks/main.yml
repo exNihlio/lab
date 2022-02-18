@@ -70,9 +70,9 @@
         target: /data
         type: volume
     name: "services_drone_server"
-    network_mode: "bridge"
-    ports:
-      - "8443:8443"
+    network_mode: "host"
+    #ports:
+    #  - "443:443"
     restart_policy: "unless-stopped"
     state: "started"
 
