@@ -51,7 +51,7 @@
       DRONE_DATABASE_DRIVER: "sqlite3"
       DRONE_GIT_PASSWORD: "{{ cicd.gitpassword }}"
       DRONE_GIT_USERNAME: "{{ cicd.gitusername }}"
-      DRONE_GITEA_CLIENT_ID: "{{ cicd.gitea.oauth_client_aid }}"
+      DRONE_GITEA_CLIENT_ID: "{{ cicd.gitea_oauth_client_id }}"
       DRONE_GITEA_CLIENT_SECRET: "{{ cicd.gitea_oauth_client_secret }}"
       DRONE_GITEA_SERVER: "https://git.sami.dog:3000"
       DRONE_LOGS_DEBUG: "true"
