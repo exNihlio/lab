@@ -60,12 +60,12 @@
 
 - name: Delete the LetsEncrypt cert from the buildcontext
   file:
-    path: ./privkey.pem
+    path: ./containers/files/privkey.pem
     state: absent
   when: jenkins.rebuild == true
 
 - name: Delete the LetsEncrypt key from the buildcontext
   file:
-    path: ./fullchain.pem
+    path: ./containers/files/fullchain.pem
     state: absent
   when: jenkins.rebuild == true
