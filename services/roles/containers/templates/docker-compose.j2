@@ -40,6 +40,7 @@ services:
       - /data/disks/nginx/repos:/usr/share/nginx/html:ro
       - /data/disks/nginx/conf:/etc/nginx/conf.d:ro
       - /data/disks/config/certs:/certs:ro
+{#
   drone_server:
     domainname: "{{ cicd.domainname }}"
     environment:
@@ -59,3 +60,4 @@ services:
       - drone-db:/data
 volumes:
   drone-db:
+  #}
