@@ -52,3 +52,8 @@ configuration is highly attractive.
 |:5443| TCP      | HTTPS | Docker Registry |
 |:8200| TCP      | HTTPS | Vault           |
 |:9443| TCP      | HTTPS | Portainer       |
+
+
+## Deployment Notes
+
+[Drone](./docs/drone.md)
