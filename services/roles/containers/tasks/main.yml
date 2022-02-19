@@ -92,10 +92,12 @@
     dns_servers:
       - "10.1.10.20"
     domainname: "{{ cicd.domainname }}"
+    etc_hosts:
+      cicd.sami.dog: "10.1.10.20"
     env:
       DRONE_RPC_SECRET: "{{ cicd.rpc_token }}"
       DRONE_RPC_PROTO: "https"
-      DRONE_RPC_HOST: "{{cicd.hostname}}.{{cicd.domainname}}"
+      DRONE_RPC_HOST: "{{cicd.hostname}}.{{cicd.domainname}}:10443"
       DRONE_RUNNER_NAME: "${HOSTNAME}-runner"
       DRONE_RUNNER_CAPACITY: "2"
       DRONE_RUNNER_NETWORKS: "bridge"
