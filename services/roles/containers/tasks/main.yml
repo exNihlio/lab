@@ -98,6 +98,8 @@
       cicd.sami.dog: "10.1.10.20"
       git.sami.dog: "10.1.10.20"
     env:
+      DRONE_DEBUG: "true"
+      DRONE_TRACE: "true"
       DRONE_RPC_SECRET: "{{ cicd.rpc_token }}"
       DRONE_RPC_PROTO: "https"
       DRONE_RPC_HOST: "{{cicd.hostname}}.{{cicd.domainname}}:10443"
