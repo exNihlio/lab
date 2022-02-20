@@ -1,4 +1,6 @@
 certpath: "/data/disks/config/certs"
+git:
+  server: "https://git.sami.dog:3001"
 registry:
   domainname: "sami.dog"
   hostname: "registry"
