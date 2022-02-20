@@ -54,35 +54,8 @@ cicd:
             6231396263343035330a616364633537656131643831613735353766333961653665333864363236
             39306631346464643336633764333330663233393761326538633665353733613031353932643231
             6463333731613437383265663931376435346436393761393338
-  runner:
-    env:
-      DRONE_RPC_SECRET: "{{ cicd.rpc_token }}"
-      DRONE_RPC_PROTO: "https"
-      DRONE_RPC_HOST: "{{cicd.hostname}}.{{cicd.domainname}}:10443"
-      DRONE_RUNNER_NAME: "${HOSTNAME}-runner"
-      DRONE_RUNNER_CAPACITY: "2"
-      DRONE_RUNNER_NETWORKS: "bridge"
-    hostname: "runner-1"
-    image: "{{ cicd.runner_image }}:{{ cicd.runner_tag }}"
   runner_image: "drone/drone-runner-docker"
   runner_tag: "1.8.0"
-  server:
-    env:
-      DRONE_DATABASE_DATASOURCE: "/data/database.sqlite"
-      DRONE_DATABASE_DRIVER: "sqlite3"
-      DRONE_GIT_PASSWORD: "{{ cicd.gitpassword }}"
-      DRONE_GIT_USERNAME: "{{ cicd.gitusername }}"
-      DRONE_GITEA_CLIENT_ID: "{{ cicd.gitea_oauth_client_id }}"
-      DRONE_GITEA_CLIENT_SECRET: "{{ cicd.gitea_oauth_client_secret }}"
-      DRONE_GITEA_SERVER: "https://git.sami.dog:3000"
-      DRONE_LOGS_DEBUG: "true"
-      DRONE_RPC_SECRET: "{{ cicd.rpc_token }}"
-      DRONE_SERVER_HOST: "{{ cicd.hostname }}.{{ cicd.domainname }}:10443"
-      DRONE_SERVER_PROTO: "https"
-      DRONE_SERVER_PORT: "10443"
-      DRONE_TLS_CERT: "/certs/live/{{ cicd.hostname }}.{{cicd.domainname }}/fullchain.pem"
-      DRONE_TLS_KEY: "/certs/live/{{ cicd.hostname }}.{{ cicd.domainname }}/privkey.pem"
-      DRONE_USER_CREATE: "username:drone-cicd,admin:true,token:{{ cicd.rpc_token }}"
   hostname: "cicd"
   image: "drone/drone"
   tag: "2.9.1"
