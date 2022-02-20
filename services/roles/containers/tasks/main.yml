@@ -106,9 +106,6 @@
       DRONE_RUNNER_NAME: "${HOSTNAME}-runner"
       DRONE_RUNNER_CAPACITY: "2"
       DRONE_RUNNER_NETWORKS: "bridge"
-      DRONE_UI_ENABLED: "true"
-      DRONE_UI_USER: "root"
-      DRONE_UI_PASSWORD: "foobar17!"
     hostname: "runner-1"
     image: "{{ cicd.runner_image }}:{{ cicd.runner_tag }}"
     mounts:
