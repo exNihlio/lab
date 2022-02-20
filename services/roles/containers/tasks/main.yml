@@ -57,7 +57,7 @@
       DRONE_GIT_USERNAME: "{{ cicd.gitusername }}"
       DRONE_GITEA_CLIENT_ID: "{{ cicd.gitea_oauth_client_id }}"
       DRONE_GITEA_CLIENT_SECRET: "{{ cicd.gitea_oauth_client_secret }}"
-      DRONE_GITEA_SERVER: "{{ git.server }}"
+      DRONE_GITEA_SERVER: "https://git.sami.dog:3001" # "{{ git.server }}"
       DRONE_LOGS_DEBUG: "true"
       DRONE_LOGS_TEXT: "true"
       DRONE_LOGS_TRACE: "true"
