@@ -59,6 +59,8 @@
       DRONE_GITEA_CLIENT_SECRET: "{{ cicd.gitea_oauth_client_secret }}"
       DRONE_GITEA_SERVER: "https://git.sami.dog:3000"
       DRONE_LOGS_DEBUG: "true"
+      DRONE_LOGS_TEXT: "true"
+      DRONE_LOGS_TRACE: "true"
       DRONE_RPC_SECRET: "{{ cicd.rpc_token }}"
       DRONE_SERVER_HOST: "{{ cicd.hostname }}.{{ cicd.domainname }}:10443"
       DRONE_SERVER_PROTO: "https"
