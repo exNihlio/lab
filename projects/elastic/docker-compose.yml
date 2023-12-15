@@ -1,0 +1,86 @@
+version: '3.7'
+services:
+  elastic_1:
+    image: elasticsearch:7.2.1
+    ports:
+      - "9200:9200"
+    networks: 
+      es_sub:
+        ipv4_address: 10.14.14.2
+    volumes:
+      - type: volume
+        source: es_data_1
+        target: /usr/share/elasticsearch/data
+    environment:
+      - node.name=es1
+      - cluster.name=general-cluster
+      - path.data=/usr/share/elasticsearch/data
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+      - bootstrap.memory_lock=true
+      - discovery.seed_hosts=10.14.14.3,10.14.14.4
+      - cluster.initial_master_nodes=10.14.14.2,10.14.14.3,10.14.14.4
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+
+  elastic_2:
+    image: elasticsearch:7.2.1
+    ports:
+      - "9201:9200"
+    networks: 
+      es_sub:
+        ipv4_address: 10.14.14.3
+    volumes:
+      - type: volume
+        source: es_data_2
+        target: /usr/share/elasticsearch/data
+    environment:
+      - node.name=es2
+      - cluster.name=general-cluster
+      - path.data=/usr/share/elasticsearch/data
+      - ES_JAVA_OPTS=-Xms256m -Xmx256m
+      - bootstrap.memory_lock=true
+      - discovery.seed_hosts=10.14.14.2,10.14.14.4
+      - cluster.initial_master_nodes=10.14.14.2,10.14.14.3,10.14.14.4
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+
+  elastic_3:
+    image: elasticsearch:7.2.1
+    ports:
+      - "9202:9200"
+    networks: 
+      es_sub:
+        ipv4_address: 10.14.14.4
+    volumes:
+      - type: volume
+        source: es_data_3
+        target: /usr/share/elasticsearch/data
+    environment:
+      - node.name=es3
+      - cluster.name=general-cluster
+      - path.data=/usr/share/elasticsearch/data
+      - ES_JAVA_OPTS=-Xms256m -Xmx256m
+      - bootstrap.memory_lock=true
+      - discovery.seed_hosts=10.14.14.2,10.14.14.3
+      - cluster.initial_master_nodes=10.14.14.2,10.14.14.3,10.14.14.4
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+volumes:
+  es_data_1:
+  es_data_2:
+  es_data_3:
+
+networks:
+  es_sub:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+      - 
+        subnet: 10.14.14.0/24

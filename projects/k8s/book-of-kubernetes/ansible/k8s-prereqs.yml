@@ -1,0 +1,54 @@
+- hosts: all
+  gather_facts: yes
+  become: true
+  tasks:
+    - name: Enable br_netfilter
+      modprobe:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - "br_netfilter"
+
+    - name: Enable IP routing
+      sysctl:
+        name: "{{ item }}"
+        state: present
+        value: "1"
+        sysctl_file: /etc/sysctl.conf
+      loop:
+        - "net.ipv4.ip_forward"
+        - "net.bridge.bridge-nf-call-iptables"
+          #- "net.bridge.bridge-nf-call-ip6" # leave out because AWS hates ipv6
+
+    - name: Install prerequisite packages
+      yum:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - "conntrack-tools" # needed for kubeadm 
+        - "open-iscsi"
+        - "nfs-client" ## equivalent to nfs-common on Ubuntu machines
+    ## Praise to this SO https://stackoverflow.com/questions/62795930/how-to-install-kubernetes-in-suse-linux-enterprize-server-15-virtual-machines
+    - name: Add the Google K8s RPM GPG key
+      rpm_key:
+        key: "{{ item }}"
+        state: present
+      loop:
+        - "https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg"
+        - "https://packages.cloud.google.com/yum/doc/yum-key.gpg"
+
+    - name: Add the Google K8s Yum repo
+      zypper_repository:
+        name: "google-k8s"
+        state: present
+        repo:  "https://packages.cloud.google.com/yum/repos/kubernetes-el7-aarch64"
+
+    - name: Install K8s packages
+      zypper:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - "kubernetes-kubelet"
+        - "kubernetes-kubeadm"
+        - "kubectl"
+

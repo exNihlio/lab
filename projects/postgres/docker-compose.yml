@@ -1,0 +1,49 @@
+version: '3.7'
+services:
+  postgres_1:
+    image: postgres:13.9
+    networks: 
+      postgres:
+        ipv4_address: 10.14.14.10
+    environment:
+      POSTGRES_PASSWORD: "foobar17" 
+    extra_hosts:
+      - "postgres1.example.com:10.14.14.10"
+      - "postgres2.example.com:10.14.14.20"
+      - "pgadmin.example.com:10.14.14.40"
+    command: ["postgres", "-c", "wal_level=logical"]
+  postgres_2:
+    image: postgres:13.9
+    networks: 
+      postgres:
+        ipv4_address: 10.14.14.20
+    environment:
+      POSTGRES_PASSWORD: "foobar17" 
+    extra_hosts:
+      - "postgres1.example.com:10.14.14.10"
+      - "postgres2.example.com:10.14.14.20"
+      - "pgadmin.example.com:10.14.14.20"
+  pgadmin:
+    image: dpage/pgadmin4:7.8
+    networks:
+      postgres:
+        ipv4_address: 10.14.14.40
+    environment:
+      PGADMIN_DEFAULT_PASSWORD: "foobar17"
+      PGADMIN_DEFAULT_EMAIL: "pgadmin@example.com"
+    extra_hosts:
+      - "postgres1.example.com:10.14.14.10"
+      - "postgres2.example.com:10.14.14.20"
+      - "pgadmin.example.com:10.14.14.40"
+    ports:
+      - "8080:80"
+      - "8443:443"
+
+networks:
+  postgres:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+      - 
+        subnet: 10.14.14.0/24
